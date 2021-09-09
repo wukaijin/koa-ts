@@ -1,12 +1,14 @@
 import { Context, Next } from 'koa'
-import { toMd5 } from '../../utils'
+import { toMd5 } from '@/utils'
+import {  User } from '@/services/user'
 export const signup = async (ctx: Context, next: Next) => {
   const { request } = ctx
-  let  { name, password } = request.body
+  let  { uid, password } = request.body
   password = toMd5(password)
   ctx.responseSuccess(ctx, `ojbk
-  ${name}
+  ${uid}
   ${password}
   `)
+  User()
   next()
 }
