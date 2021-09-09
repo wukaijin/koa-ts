@@ -1,7 +1,7 @@
 import { Rules } from 'async-validator';
 import Router, { url } from 'koa-router'
-import { createValidator } from '../utils/validate'
-import moment from 'moment'
+import { createValidator } from '../utils'
+import { signinController, signupController } from '../controllers/user'
 
 export const userPath = '/user'
 export const userRouter = new Router()
@@ -31,15 +31,5 @@ const userRules:Rules = {
 }
 const userValidator = createValidator(userRules)
 
-userRouter.post('/signup', userValidator,  async (ctx, next) => {
-// userRouter.post('/signup',  async (ctx, next) => {
-  const { request } = ctx
-  const { id, password } = request.body
-  // await mockTime(2000)
-  userValidator
-  ctx.body = `ojbk  ${moment().format('YYYY-MM-DD HH:MM:ss')}
-  ${id}
-  ${password}
-  `
-  next()
-})
+userRouter.post('/signin', userValidator,  signinController)
+userRouter.post('/signup', userValidator,  signupController)

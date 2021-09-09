@@ -1,14 +1,14 @@
 import { Context } from 'koa'
 
-export function responceError(ctx: Context, message: string) {
+export function responseError(ctx: Context, message: string, code: number = -1) {
   ctx.state = 404
   ctx.body = {
-    code: -1,
+    code,
     msg: message
   }
 }
 
-export function responceSuccess(ctx: Context, data: any) {
+export function responseSuccess(ctx: Context, data: any) {
   ctx.state = 200
   ctx.body = {
     code: 200,

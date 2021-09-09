@@ -1,6 +1,6 @@
 import Schema, { Rules, ValidateError, ValidateFieldsError, Values } from 'async-validator'
 import { Context, Next } from 'koa'
-import { responceError } from './standardResponceWrapper'
+import { responseError } from './standardResponceWrapper'
 
 // const descriptor: Rules = {
 //   name: {
@@ -24,7 +24,7 @@ import { responceError } from './standardResponceWrapper'
 
 function handleErrors(errors: any, fields: any, ctx: Context) {
   if (errors && errors.length) {
-    responceError(ctx, errors[0].message)
+    responseError(ctx, errors[0].message)
   }
 }
 
