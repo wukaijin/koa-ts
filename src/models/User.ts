@@ -12,7 +12,7 @@ export class User extends Model<User> {
   email!: string;
 
   @Column
-  password!: string;
+  password!: string;  
 
   @Column
   avator!: string;
