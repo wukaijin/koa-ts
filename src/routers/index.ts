@@ -7,6 +7,6 @@ const router: Router = new Router({
 
 router.use(userPath, userRouter.routes())
 
-export const useRouters = (app: Koa) => {
+export const registerRoutes = (app: Koa) => {
   app.use(router.routes())
 }

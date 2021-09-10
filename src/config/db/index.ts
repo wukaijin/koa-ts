@@ -8,7 +8,8 @@ const DBsequelize = new Sequelize('tencent', 'root', '123456', {
     max: 5,
     min: 0,
     idle: 10000
-  }
+  },
+  logging: console.log
 })
 
 export default DBsequelize

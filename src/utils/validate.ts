@@ -1,6 +1,6 @@
 import Schema, { Rules, ValidateError, ValidateFieldsError, Values } from 'async-validator'
 import { Context, Next } from 'koa'
-import { responseError } from './standardResponceWrapper'
+import { responseError } from './response'
 
 // const descriptor: Rules = {
 //   name: {
