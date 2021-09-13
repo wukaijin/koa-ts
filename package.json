@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index.ts --files",
+    "dev": "ts-node -r tsconfig-paths/register src/index.ts --files",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -30,7 +31,9 @@
     "@types/koa": "^2.13.4",
     "@types/koa-logger": "^3.1.1",
     "@types/koa-router": "^7.4.4",
+    "@types/node": "^16.9.1",
     "@types/sequelize": "^4.28.10",
+    "@types/validator": "^13.6.3",
     "tsconfig-paths": "^3.11.0"
   }
 }

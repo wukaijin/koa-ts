@@ -1,5 +1,7 @@
-import Schema, { Rules, ValidateError, ValidateFieldsError, Values } from 'async-validator'
+import { IKoaBodyOptions } from 'koa-body'
+import Schema, { Rules } from 'async-validator'
 import { Context, Next } from 'koa'
+import { ParsedUrlQuery } from 'querystring'
 import { responseError } from './response'
 
 // const descriptor: Rules = {
@@ -24,16 +26,32 @@ import { responseError } from './response'
 
 function handleErrors(errors: any, fields: any, ctx: Context) {
   if (errors && errors.length) {
-    responseError(ctx, errors[0].message)
+    return responseError(ctx, errors[0].message)
   }
+  return responseError(ctx, '参数校验未通过')
 }
 
-const getParams = (ctx: Context) => {
+interface Map<T> {
+  [key: string]: T
+}
+const reduceParams = (target: ParsedUrlQuery, rules: Rules) => {
+  const result = {}
+  Object.keys(rules).forEach((e) => {
+    result[e] = getValue(target, e)
+  })
+  return result
+}
+
+const getValue = <T extends Object, K extends keyof T>(o: T, key: K): T[K] | '' => {
+  return o[key] || ''
+}
+const getParams = (ctx: Context, rule: Rules) => {
+  reduceParams
   switch (ctx.method) {
     case 'GET':
-      return ctx.query
+      return reduceParams(ctx.query, rule)
     case 'POST':
-      return ctx.request.body
+      return reduceParams(ctx.request.body, rule)
     default:
       return {}
   }
@@ -43,9 +61,10 @@ export function createValidator(descriptor: Rules) {
   const validator = new Schema(descriptor)
   return async function (ctx: Context, next: Next) {
     try {
-      await validator.validate(getParams(ctx))
-      console.log('await')
-      next()
+      console.log('getParams(ctx, descriptor)', getParams(ctx, descriptor))
+      const r = await validator.validate(getParams(ctx, descriptor))
+      console.log('await', r)
+      await next()
     } catch ({ errors, fields }) {
       // const { errors, fields } = err
       console.log('catch', { errors, fields })

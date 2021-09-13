@@ -8,11 +8,11 @@ export function responseError(ctx: Context, message: string, code: number = -1) 
   }
 }
 
-export function responseSuccess(ctx: Context, data: any) {
+export function responseSuccess(ctx: Context, data: any, message: string) {
   ctx.state = 200
   ctx.body = {
     code: 200,
-    msg: null,
+    msg: message || 'ok',
     data
   }
 }

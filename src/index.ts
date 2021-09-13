@@ -16,7 +16,7 @@ Object.assign(app.context, {
   responseSuccess
 })
 
-// const listeb = app.listen(3008, () => {
-//   console.log('koa-ts app start!')
-// })
+const listeb = app.listen(3008, () => {
+  console.log('koa-ts app start!')
+})
 // console.log(listeb)

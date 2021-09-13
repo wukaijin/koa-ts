@@ -10,7 +10,9 @@ module.exports = {
       },
       uid: {
         type: Sequelize.STRING,
+        unique: true,
         primaryKey: true,
+        
         allowNull: false,
       },
       email: {
@@ -32,7 +34,7 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: new Date()
       },
-      logindAt: {
+      loginAt: {
         allowNull: true,
         type: Sequelize.DATE
       },
