@@ -1,44 +1,59 @@
-import { Optional } from 'sequelize/types';
-import { Table, Column, Model, CreatedAt, UpdatedAt, PrimaryKey, Unique } from 'sequelize-typescript';
+import { Optional } from 'sequelize/types'
+import {
+  Table,
+  Column,
+  Model,
+  CreatedAt,
+  UpdatedAt,
+  PrimaryKey,
+  Unique
+} from 'sequelize-typescript'
 
 export interface UserAttributes {
   id: number
   uid: string
-  email: string |null
+  email: string | null
   password: string
-  avator: string |null
-  logindAt: Date |null
+  avator: string | null
+  logindAt: Date | null
 }
 
 // Some attributes are optional in `User.build` and `User.create` calls
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
 @Table({
-  tableName: 'users', modelName: 'users', freezeTableName:true
+  tableName: 'users',
+  modelName: 'users',
+  freezeTableName: true
 })
 export class User extends Model<User, UserCreationAttributes> {
   @PrimaryKey
   @Unique
   @Column
-  uid!: string;
+  id!: string
+
+  @PrimaryKey
+  @Unique
+  @Column
+  uid!: string
 
   @Column
-  email!: string;
+  email!: string
 
   @Column
-  password!: string;  
+  password!: string
 
   @Column
-  avator!: string;
+  avator!: string
 
   @CreatedAt
   @Column
-  createdAt!: Date;
+  createdAt!: Date
 
   @UpdatedAt
   @Column
-  updatedAt!: Date; 
+  updatedAt!: Date
 
   @Column
-  loginAt!: Date;
+  loginAt!: Date
 }

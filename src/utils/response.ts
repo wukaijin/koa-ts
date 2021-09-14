@@ -1,18 +1,31 @@
 import { Context } from 'koa'
 
-export function responseError(ctx: Context, message: string, code: number = -1) {
-  ctx.state = 404
-  ctx.body = {
-    code,
+interface IResponseOptions {
+  message?: string
+  code?: number
+}
+
+export function responseError(
+  this: Context,
+  message: string,
+  options: IResponseOptions = {}
+) {
+  this.status = 404
+  this.body = {
+    code: options.code || 404,
     msg: message
   }
 }
 
-export function responseSuccess(ctx: Context, data: any, message: string) {
-  ctx.state = 200
-  ctx.body = {
-    code: 200,
-    msg: message || 'ok',
+export function responseSuccess(
+  this: Context,
+  data: any,
+  options: IResponseOptions = {}
+) {
+  this.status = 200
+  this.body = {
+    code: options.code || 200,
+    msg: options.message || 'ok',
     data
   }
 }

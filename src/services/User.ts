@@ -1,4 +1,4 @@
-import { WhereOptions } from 'sequelize';
+import { FindOptions, WhereOptions } from 'sequelize'
 // import { IUser } from './types.d';
 import { User, UserAttributes } from '@/models'
 // import { Optional } from 'sequelize/types'
@@ -11,11 +11,15 @@ export class UserService {
     const users = await User.build(data)
     return users
   }
-  public static async getAll(): Promise<User[] | null> {
-    const users = await User.findAll({})
+  public static async list(
+    findOption: FindOptions = {}
+  ): Promise<User[] | null> {
+    const users = await User.findAll(findOption)
     return users
   }
-  public static async get(query: Record<string, unknown>): Promise<User | null> {
+  public static async get(
+    query: Record<string, unknown>
+  ): Promise<User | null> {
     const users = await User.findOne(query)
     return users
   }
@@ -23,10 +27,18 @@ export class UserService {
     const users = await User.create(data)
     return users
   }
-  public static async find(data: WhereOptions<UserAttributes>): Promise<User | null> {
+  public static async find(
+    data: WhereOptions<UserAttributes>
+  ): Promise<User | null> {
     const users = await User.findOne({
       where: data
     })
     return users
   }
+  // public static async update(data: WhereOptions<UserAttributes>): Promise<User | null> {
+  //   const users = await User.({
+  //     where: data
+  //   })
+  //   return users
+  // }
 }
