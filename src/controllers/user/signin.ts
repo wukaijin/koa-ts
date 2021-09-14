@@ -14,6 +14,8 @@ export const signin = async (ctx: Context, next: Next) => {
   } else {
     user.loginAt = new Date()
     await user.save()
+    ctx.session!.name = user.uid
+    ctx.session!.visit = false
     ctx.responseSuccess(`ojbk`)
     await next()
   }

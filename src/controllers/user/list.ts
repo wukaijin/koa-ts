@@ -7,6 +7,7 @@ import moment from 'moment'
 export const list = async (ctx: Context, next: Next) => {
   const { request } = ctx
   // let  { uid, password } = request.body
+  console.log(ctx.session!.name, ctx.session!.visit)
   let params: UserAttributes = request.body
   params.password = toMd5(params.password)
   const users = await UserService.list()
@@ -22,7 +23,6 @@ export const list = async (ctx: Context, next: Next) => {
         u.createdAt && moment(u.createdAt).format('YYYY-MM-DD HH:mm:ss'),
       loginAt: u.loginAt && moment(u.loginAt).format('YYYY-MM-DD HH:mm:ss')
     }))
-    console.log(list)
     ctx.responseSuccess(list)
     await next()
   }

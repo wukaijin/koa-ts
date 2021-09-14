@@ -27,6 +27,11 @@ export class UserService {
     const users = await User.create(data)
     return users
   }
+  public static async batchsSet(data: UserAttributes[]): Promise<User[] | null> {
+    debugger
+    const users = await User.bulkCreate(data)
+    return users
+  }
   public static async find(
     data: WhereOptions<UserAttributes>
   ): Promise<User | null> {

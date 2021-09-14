@@ -5,7 +5,9 @@ import {
   isRegistController,
   signinController,
   signupController,
-  listController
+  listController,
+  visitController,
+  batchSignupController
 } from '@/controllers/user'
 
 export const userPath = '/user'
@@ -53,5 +55,8 @@ userRouter.get('/isRegist', isRegistController)
 userRouter.post('/signin', userSigninValidator, signinController)
 userRouter.post('/signup', userValidator, signupController)
 userRouter.get('/list', listController)
+userRouter.get('/visit', visitController)
+userRouter.post('/batchSignup', batchSignupController)
+
 // userRouter.post('/signup', userValidator)
 // userRouter.post('/signup',  signupController)

@@ -2,7 +2,6 @@ import { IKoaBodyOptions } from 'koa-body'
 import Schema, { Rules } from 'async-validator'
 import { Context, Next } from 'koa'
 import { ParsedUrlQuery } from 'querystring'
-import { responseError } from './response'
 
 // const descriptor: Rules = {
 //   name: {
@@ -24,11 +23,14 @@ import { responseError } from './response'
 //   }
 // }
 
-function handleErrors(errors: any, fields: any, ctx: Context) {
+function handleErrors(errors: any, ctx: Context) {
   if (errors && errors.length) {
-    return responseError.call(ctx, errors[0].message)
+    return ctx.responseSuccess(null, { message: errors[0].message, code: -1 })
   }
-  return responseError.call(ctx, '参数校验未通过')
+  return ctx.responseSuccess(null, {
+    message: errors.message || '发生未知错误',
+    code: -1
+  })
 }
 
 interface Map<T> {
@@ -68,10 +70,10 @@ export function createValidator(descriptor: Rules) {
       const r = await validator.validate(getParams(ctx, descriptor))
       console.log('createValidator await', r)
       await next()
-    } catch ({ errors, fields }) {
-      // const { errors, fields } = err
-      console.log('catch', { errors, fields })
-      return handleErrors(errors, fields, ctx)
+    } catch (err: any) {
+      const { errors } = err
+      if (errors) return handleErrors(errors, ctx)
+      return handleErrors(err, ctx)
     }
   }
 }
