@@ -3,6 +3,7 @@ import crypto from 'crypto'
 export { createValidator } from './validate'
 export { extendContextWithReply } from './reply'
 export { useSession } from './session'
+export { default as logger } from './logger'
 
 export const toMd5 = (str: string | string[] | undefined) => {
   if (!str) return ''

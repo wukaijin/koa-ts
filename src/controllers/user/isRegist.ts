@@ -10,7 +10,6 @@ export const isRegist = async (ctx: Context, next: Next) => {
     uid: request.query.uid || ''
   }
   const result = await UserService.find(params)
-  console.log(result)
   if (result instanceof User) {
     ctx.reply.fail('已被注册')
   } else {

@@ -1,7 +1,7 @@
 import Koa, { Context } from 'koa'
 import { useMiddlewares } from './middlewares'
 import { registerRoutes } from './routers'
-import { extendContextWithReply, useSession } from './utils'
+import { extendContextWithReply, useSession, logger } from './utils'
 // import  './utils/log'
 
 import './models/sequelize'
@@ -15,7 +15,8 @@ useSession(app)
 
 extendContextWithReply(app.context as Context)
 
-const listeb = app.listen(3008, () => {
-  console.log('koa-ts app start!')
+app.listen(3008, () => {
+  logger.success('Koa app start!')
+  // logger.error('naasd kashd kajshd kasv a')
+  // logger.info([1,2,3,4,5,7])
 })
-// console.log(listeb)
