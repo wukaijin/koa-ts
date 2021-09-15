@@ -25,12 +25,9 @@ import { ParsedUrlQuery } from 'querystring'
 
 function handleErrors(errors: any, ctx: Context) {
   if (errors && errors.length) {
-    return ctx.responseSuccess(null, { message: errors[0].message, code: -1 })
+    return ctx.reply.fail(errors[0].message)
   }
-  return ctx.responseSuccess(null, {
-    message: errors.message || '发生未知错误',
-    code: -1
-  })
+  return ctx.reply.fail(errors.message || '发生未知错误')
 }
 
 interface Map<T> {

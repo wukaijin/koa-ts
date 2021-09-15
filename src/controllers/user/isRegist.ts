@@ -12,10 +12,9 @@ export const isRegist = async (ctx: Context, next: Next) => {
   const result = await UserService.find(params)
   console.log(result)
   if (result instanceof User) {
-    ctx.responseError(null)
-    ctx.responseSuccess(null, { message: '已被注册', code: -1 })
+    ctx.reply.fail('已被注册')
   } else {
-    ctx.responseSuccess(null)
+    ctx.reply.success(null)
   }
   await next()
 }

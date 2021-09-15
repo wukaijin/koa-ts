@@ -1,7 +1,7 @@
 import crypto from 'crypto'
 
 export { createValidator } from './validate'
-export { responseError, responseSuccess } from './response'
+export { extendContextWithReply } from './reply'
 
 export const toMd5 = (str: string | string[] | undefined) => {
   if (!str) return ''

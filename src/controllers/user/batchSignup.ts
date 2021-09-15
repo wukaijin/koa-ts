@@ -11,6 +11,6 @@ export const batchSignup = async (ctx: Context, next: Next) => {
   })
   debugger
   const result = await UserService.batchsSet(params)
-  ctx.responseSuccess(result)
+  ctx.reply.success(result)
   await next()
 }

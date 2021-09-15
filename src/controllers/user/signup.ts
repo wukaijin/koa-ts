@@ -8,6 +8,6 @@ export const signup = async (ctx: Context, next: Next) => {
   let params: UserAttributes = request.body
   params.password = toMd5(params.password)
   const result = await UserService.set(params)
-  ctx.responseSuccess(result)
+  ctx.reply.success(result)
   await next()
 }

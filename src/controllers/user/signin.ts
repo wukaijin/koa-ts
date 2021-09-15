@@ -9,14 +9,14 @@ export const signin = async (ctx: Context, next: Next) => {
   params.password = toMd5(params.password)
   const user = await UserService.find(params)
   if (!user) {
-    ctx.responseSuccess(null, { message: '用户名或密码错误', code: -1 })
+    ctx.reply.fail('用户名或密码错误')
     // await next()
   } else {
     user.loginAt = new Date()
     await user.save()
     ctx.session!.name = user.uid
     ctx.session!.visit = false
-    ctx.responseSuccess(`ojbk`)
+    ctx.reply.success(`ojbk`)
     await next()
   }
 }
