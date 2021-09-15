@@ -1,8 +1,7 @@
 import Koa, { Context } from 'koa'
 import { useMiddlewares } from './middlewares'
 import { registerRoutes } from './routers'
-import { useSession } from '@/config/session/index';
-import { extendContextWithReply } from './utils'
+import { extendContextWithReply, useSession } from './utils'
 // import  './utils/log'
 
 import './models/sequelize'

@@ -1,7 +1,19 @@
-import Koa from 'koa'
-import KoaSession from 'koa-session'
-const SESSION_KEY = 'some secret hurr'
-const CONFIG = {
+export const SESSION_KEY = 'some secret hurr'
+
+const store = {
+  get(key: string) {
+
+  },
+  set(key: string, session: Record<string, unknown>) {
+
+  },
+
+  destroy(key: string) {
+
+  }
+}
+
+export const CONFIG = {
   key: 'tencent.sess' /** (string) cookie key (default is koa.sess) */,
   /** (number || 'session') maxAge in ms (default is 1 days) */
   /** 'session' will result in a cookie that expires when session/browser is closed */
@@ -19,13 +31,5 @@ const CONFIG = {
   // secure: true /** (boolean) secure cookie*/
   // sameSite:
   //   'none' /** (string) session cookie sameSite options (default null, don't set it) */
-}
-
-export const useSession = (app: Koa) => {
-  if (Array.isArray(app.keys)) {
-    app.keys = [SESSION_KEY, ...app.keys]
-  } else {
-    app.keys = [SESSION_KEY]
-  }
-  app.use(KoaSession(CONFIG, app))
+  store
 }
