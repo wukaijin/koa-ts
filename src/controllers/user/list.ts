@@ -1,13 +1,13 @@
 import { User, UserAttributes } from '@/models'
 import { Context, Next } from 'koa'
-import { toMd5 } from '@/utils'
+import { logger, toMd5 } from '@/utils'
 import { UserService } from '@/services'
 import moment from 'moment'
 
 export const list = async (ctx: Context, next: Next) => {
   const { request } = ctx
   // let  { uid, password } = request.body
-  console.log(ctx.session!.name, ctx.session!.visit)
+  logger.info('ctx.session', ctx.session)
   let params: UserAttributes = request.body
   params.password = toMd5(params.password)
   const users = await UserService.list()

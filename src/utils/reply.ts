@@ -9,7 +9,6 @@ declare module 'koa' {
 const CONTEXT_REPLY = Symbol('CONTEXT_REPLY')
 const _CONTEXT_REPLY = Symbol('_CONTEXT_REPLY')
 
-
 interface IReplyConfig {
   message: {
     success: string
@@ -41,12 +40,12 @@ class ContextReply {
       }
     }
   }
-  success(data: any) {
+  success(data?: any) {
     this.ctx.status = 200
     this.ctx.body = {
       code: this.config.code.success,
-      msg: this.config.message.success,
-      data
+      message: this.config.message.success,
+      data: data || null
     }
   }
   fail(message: string, code?: number) {
@@ -54,7 +53,7 @@ class ContextReply {
     this.ctx.status = 200
     this.ctx.body = {
       code: code || this.config.code.fail,
-      msg: message || this.config.message.fail,
+      message: message || this.config.message.fail,
       data: null
     }
   }
@@ -63,7 +62,7 @@ class ContextReply {
     this.ctx.status = 404
     this.ctx.body = {
       code: code || this.config.code.error,
-      msg: message || this.config.code.error,
+      message: message || this.config.code.error,
       data: null
     }
   }
@@ -97,4 +96,3 @@ export function extendContextWithReply(ctx: Context) {
     }
   })
 }
-

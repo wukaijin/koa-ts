@@ -5,6 +5,7 @@ import {
   isRegistController,
   signinController,
   signupController,
+  signoutController,
   listController,
   visitController,
   batchSignupController
@@ -54,6 +55,8 @@ const userSigninValidator = createValidator(userSigninRule)
 userRouter.get('/isRegist', isRegistController)
 userRouter.post('/signin', userSigninValidator, signinController)
 userRouter.post('/signup', userValidator, signupController)
+userRouter.get('/signout', signoutController)
+
 userRouter.get('/list', listController)
 userRouter.get('/visit', visitController)
 userRouter.post('/batchSignup', batchSignupController)

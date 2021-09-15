@@ -4,8 +4,9 @@
   "description": "koa + typescript",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register src/index.ts --files",
+    "start": "nodemon --config nodemon.json --delay 2 src/index.ts",
     "dev": "ts-node -r tsconfig-paths/register src/index.ts --files",
+    "db:init": "npx sequelize-cli db:migrate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -20,7 +21,6 @@
     "koa-session": "^6.2.0",
     "moment": "^2.29.1",
     "mysql2": "^2.3.0",
-    "nodemon": "^2.0.12",
     "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.6.5",
@@ -38,6 +38,7 @@
     "@types/redis": "^2.8.32",
     "@types/sequelize": "^4.28.10",
     "@types/validator": "^13.6.3",
-    "tsconfig-paths": "^3.11.0"
+    "tsconfig-paths": "^3.11.0",
+    "nodemon": "^2.0.12"
   }
 }

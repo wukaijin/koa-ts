@@ -11,7 +11,7 @@ client.on('error', err => {
   logger.error(err)
 })
 client.on('ready', () => {
-  logger.success('Reids is ready')
+  logger.success('Reids is ready!')
 })
 
 export default client
